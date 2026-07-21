@@ -1,0 +1,8 @@
+node_modules
+drive-download-20260721T125640Z-1-001
+dist
+.env
+.env.local
+.vercel
+.DS_Store
+npm-debug.log*
