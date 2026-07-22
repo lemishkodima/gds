@@ -19,5 +19,21 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script type="text/javascript">
+      (function (d, s, u, e, p) {
+        p = d.getElementsByTagName(s)[0], e = d.createElement(s),
+        e.async = 1, e.src = u, p.parentNode.insertBefore(e, p);
+      })(document, 'script', 'https://script.ringostat.com/v4/2b/2b45b161ce749f8d5fa51e099394bfb3c1f1dd84.js');
+
+      var pw = function () {
+        if (typeof ringostatAnalytics === 'undefined') {
+          setTimeout(pw, 100);
+        } else {
+          ringostatAnalytics.sendHit('pageview');
+        }
+      };
+
+      pw();
+    </script>
   </body>
 </html>
