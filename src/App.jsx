@@ -1,23 +1,21 @@
 import { createElement, useEffect, useState } from 'react'
-import {
-  ArrowRight,
-  CalendarCheck,
-  Check,
-  ChevronDown,
-  CircleDollarSign,
-  Clock3,
-  HeartHandshake,
-  Instagram,
-  MapPin,
-  Menu,
-  Phone,
-  ScanLine,
-  ShieldCheck,
-  Sparkles,
-  Target,
-  WalletCards,
-  X,
-} from 'lucide-react'
+import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right.js'
+import CalendarCheck from 'lucide-react/dist/esm/icons/calendar-check.js'
+import Check from 'lucide-react/dist/esm/icons/check.js'
+import ChevronDown from 'lucide-react/dist/esm/icons/chevron-down.js'
+import CircleDollarSign from 'lucide-react/dist/esm/icons/circle-dollar-sign.js'
+import Clock3 from 'lucide-react/dist/esm/icons/clock-3.js'
+import HeartHandshake from 'lucide-react/dist/esm/icons/heart-handshake.js'
+import Instagram from 'lucide-react/dist/esm/icons/instagram.js'
+import MapPin from 'lucide-react/dist/esm/icons/map-pin.js'
+import Menu from 'lucide-react/dist/esm/icons/menu.js'
+import Phone from 'lucide-react/dist/esm/icons/phone.js'
+import ScanLine from 'lucide-react/dist/esm/icons/scan-line.js'
+import ShieldCheck from 'lucide-react/dist/esm/icons/shield-check.js'
+import Sparkles from 'lucide-react/dist/esm/icons/sparkles.js'
+import Target from 'lucide-react/dist/esm/icons/target.js'
+import WalletCards from 'lucide-react/dist/esm/icons/wallet-cards.js'
+import X from 'lucide-react/dist/esm/icons/x.js'
 
 const PHONE_DISPLAY = '068 100 60 20'
 const PHONE_HREF = '+380681006020'
@@ -86,6 +84,12 @@ const services = [
     text: 'Професійна гігієна й підготовка до імплантації, а також ортодонтичне вирівнювання прикусу — усе в межах однієї клініки, узгоджено з вашим планом лікування.',
     cta: 'Записатися',
   },
+  {
+    number: '06',
+    title: 'Лікування зубів',
+    text: 'Карієс, пульпіт, видалення — швидко і без болю. Приймаємо і як самостійну послугу, і як підготовку до протезування чи імплантації.',
+    cta: 'Записатися',
+  },
 ]
 
 const journey = [
@@ -143,11 +147,19 @@ const faqs = [
     q: 'Чи можна прийти лише на КТ?',
     a: 'Так. Можна зробити 3D-знімок за направленням вашого стоматолога. Під час запису скажіть адміністратору, що вам потрібна лише діагностика.',
   },
+  {
+    q: 'Чи можна прийти просто вилікувати зуб?',
+    a: 'Так. У центрі лікуємо карієс і пульпіт, а також проводимо видалення зубів. Можна звернутися як по окрему послугу або пройти лікування перед протезуванням чи імплантацією.',
+  },
+  {
+    q: 'Скільки коштує лікування карієсу?',
+    a: 'Вартість залежить від глибини ураження, кількості пошкоджених поверхонь і необхідного обсягу лікування. Після огляду лікар пояснить план і погодить точну вартість до початку процедури.',
+  },
 ]
 
-function Logo({ light = false }) {
+function Logo({ light = false, href = '#top' }) {
   return (
-    <a className={`brand ${light ? 'brand--light' : ''}`} href="#top" aria-label="GDC Implants — на початок сторінки">
+    <a className={`brand ${light ? 'brand--light' : ''}`} href={href} aria-label="GDC Implants — на початок сторінки">
       <img src="/logo.svg" alt="GDC Implants" />
     </a>
   )
@@ -241,8 +253,6 @@ function LeadForm() {
         body: JSON.stringify({
           name: data.get('name'),
           phone: data.get('phone'),
-          service: data.get('service'),
-          comment: data.get('comment'),
           website: data.get('website'),
           page: window.location.href,
           source,
@@ -252,31 +262,34 @@ function LeadForm() {
       const result = await response.json().catch(() => ({}))
       if (!response.ok || !result.ok) throw new Error(result.message || 'Не вдалося відправити заявку.')
 
-      setStatus('success')
       form.reset()
-      window.dataLayer?.push({ event: 'lead_submit', form_name: 'consultation' })
+
+      let redirected = false
+      const openSuccessPage = () => {
+        if (redirected) return
+        redirected = true
+        window.location.assign('/success')
+      }
+
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push({
+        event: 'lead_submit',
+        form_name: 'consultation',
+        eventCallback: openSuccessPage,
+        eventTimeout: 900,
+      })
+      window.setTimeout(openSuccessPage, 1_000)
     } catch (error) {
       setStatus('error')
       setMessage(error instanceof Error ? error.message : 'Сталася помилка. Спробуйте ще раз.')
     }
   }
 
-  if (status === 'success') {
-    return (
-      <div className="form-success" role="status">
-        <span className="form-success__icon"><Check /></span>
-        <h3>Заявку прийнято</h3>
-        <p>Адміністратор зателефонує вам у робочий час, щоб уточнити деталі й запропонувати зручний запис.</p>
-        <button className="text-button" type="button" onClick={() => setStatus('idle')}>Надіслати ще одну заявку</button>
-      </div>
-    )
-  }
-
   return (
     <form className="lead-form" onSubmit={handleSubmit} noValidate={false}>
       <div className="lead-form__head">
         <span>Консультація</span>
-        <h3>Розкажіть, що вас турбує</h3>
+        <h3>Залиште контакти</h3>
         <p>Залиште контакти — адміністратор передзвонить і відповість на організаційні питання.</p>
       </div>
       <div className="form-field">
@@ -287,29 +300,10 @@ function LeadForm() {
         <label htmlFor="lead-phone">Телефон</label>
         <input id="lead-phone" name="phone" type="tel" autoComplete="tel" inputMode="tel" placeholder="+38 (0__) ___ __ __" pattern="[0-9+() –-]{10,24}" required />
       </div>
-      <div className="form-field">
-        <label htmlFor="lead-service">Що вас цікавить</label>
-        <select id="lead-service" name="service" defaultValue="">
-          <option value="">Оберіть послугу</option>
-          <option>3D КТ / діагностика</option>
-          <option>Імплантація одного зуба</option>
-          <option>All-on-4 / All-on-6</option>
-          <option>Протезування / коронка</option>
-          <option>Потрібна консультація</option>
-        </select>
-      </div>
-      <div className="form-field">
-        <label htmlFor="lead-comment">Коментар <span>необов’язково</span></label>
-        <textarea id="lead-comment" name="comment" rows="3" maxLength="700" placeholder="Коротко опишіть ситуацію. Не надсилайте медичні документи." />
-      </div>
       <div className="hp-field" aria-hidden="true">
         <label htmlFor="lead-website">Ваш сайт</label>
         <input id="lead-website" name="website" type="text" tabIndex="-1" autoComplete="off" />
       </div>
-      <label className="consent">
-        <input type="checkbox" required />
-        <span>Погоджуюсь на обробку даних для зворотного зв’язку щодо цієї заявки.</span>
-      </label>
       {message && <p className="form-error" role="alert">{message}</p>}
       <button className="button button--primary button--wide" type="submit" disabled={status === 'loading'}>
         {status === 'loading' ? 'Надсилаємо…' : 'Передзвоніть мені'}
@@ -317,6 +311,52 @@ function LeadForm() {
       </button>
       <p className="form-note"><ShieldCheck size={15} /> Дані надходять безпосередньо адміністратору центру.</p>
     </form>
+  )
+}
+
+function SuccessPage() {
+  useEffect(() => {
+    const previousTitle = document.title
+    const previousRobots = document.querySelector('meta[name="robots"]')
+    const robots = previousRobots || document.createElement('meta')
+    const previousRobotsContent = previousRobots?.getAttribute('content')
+
+    document.title = 'Дякуємо за звернення | GDC Implants'
+    document.body.classList.add('success-view')
+    robots.setAttribute('name', 'robots')
+    robots.setAttribute('content', 'noindex, nofollow')
+    if (!previousRobots) document.head.appendChild(robots)
+
+    return () => {
+      document.title = previousTitle
+      document.body.classList.remove('success-view')
+      if (previousRobots) {
+        if (previousRobotsContent) previousRobots.setAttribute('content', previousRobotsContent)
+        else previousRobots.removeAttribute('content')
+      } else {
+        robots.remove()
+      }
+    }
+  }, [])
+
+  return (
+    <main className="success-page" id="top">
+      <img className="success-page__image" src="/images/hero.webp" alt="" />
+      <div className="success-page__shade" />
+      <div className="container success-page__inner">
+        <Logo light href="/" />
+        <section className="success-page__card" aria-labelledby="success-title">
+          <span className="success-page__icon"><Check /></span>
+          <span className="eyebrow">Заявку надіслано</span>
+          <h1 id="success-title">Дякуємо за звернення</h1>
+          <p>Ми отримали ваші контакти. Адміністратор зателефонує найближчим часом, щоб уточнити деталі та запропонувати зручний час.</p>
+          <div className="success-page__actions">
+            <a className="button button--primary" href="/">На головну <ArrowRight size={18} /></a>
+            <a className="button button--ghost" href={`tel:${PHONE_HREF}`}><Phone size={18} /> {PHONE_DISPLAY}</a>
+          </div>
+        </section>
+      </div>
+    </main>
   )
 }
 
@@ -365,6 +405,9 @@ function useRevealAnimations() {
 function App() {
   useRevealAnimations()
 
+  const pathname = window.location.pathname.replace(/\/+$/, '') || '/'
+  if (pathname === '/success') return <SuccessPage />
+
   return (
     <>
       <Header />
@@ -386,7 +429,7 @@ function App() {
                 <a className="button button--ghost" href="#services">Переглянути рішення</a>
               </div>
               <div className="hero__metrics">
-                <div><strong>70<span> км</span></strong><small>радіус без зручного доступу до 3D-діагностики</small></div>
+                <div><strong>70<span> км</span></strong><small>до найближчого альтернативного 3D-томографа</small></div>
                 <div><strong>3D</strong><small>знімок і цифрове планування на місці</small></div>
                 <div><strong>1<span> центр</span></strong><small>від первинного огляду до постійних зубів</small></div>
               </div>
@@ -424,6 +467,7 @@ function App() {
             <div data-reveal="left">
               <SectionHeading eyebrow="Знайома ситуація" title="Можливо, ви давно відкладаєте рішення" />
               <ul className="pain-list">
+                <li>Болить зуб, і незрозуміло — лікувати чи видаляти</li>
                 <li>Втратили зуб і не знаєте, з чого почати</li>
                 <li>Втомилися від знімного протеза та обмежень у їжі</li>
                 <li>Потрібне КТ, але не хочеться їхати в інше місто</li>
