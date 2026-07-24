@@ -411,11 +411,7 @@ function ResultCard({ item, caseIndex, onOpen }) {
   }
 
   return (
-    <article
-      data-reveal="up"
-      style={{ '--reveal-delay': `${(caseIndex % 3) * 70}ms` }}
-      className="result-card"
-    >
+    <article className="result-card">
       <div className="result-card__media">
         <button
           className="result-card__open"
@@ -475,6 +471,24 @@ function ResultCard({ item, caseIndex, onOpen }) {
 
 function ResultsGallery() {
   const [preview, setPreview] = useState(null)
+  const [caseStart, setCaseStart] = useState(0)
+  const [caseDirection, setCaseDirection] = useState('next')
+  const [visibleCases, setVisibleCases] = useState(() => {
+    if (window.innerWidth <= 600) return 1
+    if (window.innerWidth <= 1080) return 2
+    return 3
+  })
+
+  useEffect(() => {
+    const updateVisibleCases = () => {
+      if (window.innerWidth <= 600) setVisibleCases(1)
+      else if (window.innerWidth <= 1080) setVisibleCases(2)
+      else setVisibleCases(3)
+    }
+
+    window.addEventListener('resize', updateVisibleCases)
+    return () => window.removeEventListener('resize', updateVisibleCases)
+  }, [])
 
   useEffect(() => {
     if (!preview) return undefined
@@ -510,20 +524,64 @@ function ResultsGallery() {
     })
   }
 
+  function moveCases(direction) {
+    setCaseDirection(direction > 0 ? 'next' : 'prev')
+    setCaseStart((current) => (current + direction + resultCases.length) % resultCases.length)
+  }
+
+  function selectCase(index) {
+    setCaseDirection(index >= caseStart ? 'next' : 'prev')
+    setCaseStart(index)
+  }
+
   const previewCase = preview ? resultCases[preview.caseIndex] : null
   const previewImage = previewCase ? previewCase.images[preview.photoIndex] : null
+  const visibleCaseIndexes = Array.from(
+    { length: visibleCases },
+    (_, index) => (caseStart + index) % resultCases.length,
+  )
 
   return (
     <>
-      <div className="results-grid">
-        {resultCases.map((item, index) => (
-          <ResultCard
-            item={item}
-            caseIndex={index}
-            key={`${item.title}-${index}`}
-            onOpen={(caseIndex, photoIndex) => setPreview({ caseIndex, photoIndex })}
-          />
-        ))}
+      <div className="results-carousel" data-reveal="up">
+        <div className="results-carousel__viewport">
+          <div
+            className={`results-grid results-grid--${caseDirection}`}
+            key={`${caseStart}-${visibleCases}`}
+          >
+            {visibleCaseIndexes.map((caseIndex) => {
+              const item = resultCases[caseIndex]
+              return (
+                <ResultCard
+                  item={item}
+                  caseIndex={caseIndex}
+                  key={`${item.title}-${caseIndex}`}
+                  onOpen={(selectedCaseIndex, photoIndex) => setPreview({ caseIndex: selectedCaseIndex, photoIndex })}
+                />
+              )
+            })}
+          </div>
+        </div>
+        <div className="results-carousel__controls">
+          <button type="button" onClick={() => moveCases(-1)} aria-label="Попередні кейси">
+            <ChevronLeft />
+          </button>
+          <div className="results-carousel__dots" aria-label="Навігація між кейсами">
+            {resultCases.map((item, index) => (
+              <button
+                className={index === caseStart ? 'is-active' : ''}
+                type="button"
+                key={item.title}
+                onClick={() => selectCase(index)}
+                aria-label={`Показати кейс ${index + 1}: ${item.title}`}
+                aria-current={index === caseStart ? 'true' : undefined}
+              />
+            ))}
+          </div>
+          <button type="button" onClick={() => moveCases(1)} aria-label="Наступні кейси">
+            <ChevronRight />
+          </button>
+        </div>
       </div>
 
       {preview && (
