@@ -3,8 +3,11 @@ import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right.js'
 import CalendarCheck from 'lucide-react/dist/esm/icons/calendar-check.js'
 import Check from 'lucide-react/dist/esm/icons/check.js'
 import ChevronDown from 'lucide-react/dist/esm/icons/chevron-down.js'
+import ChevronLeft from 'lucide-react/dist/esm/icons/chevron-left.js'
+import ChevronRight from 'lucide-react/dist/esm/icons/chevron-right.js'
 import CircleDollarSign from 'lucide-react/dist/esm/icons/circle-dollar-sign.js'
 import Clock3 from 'lucide-react/dist/esm/icons/clock-3.js'
+import Expand from 'lucide-react/dist/esm/icons/expand.js'
 import HeartHandshake from 'lucide-react/dist/esm/icons/heart-handshake.js'
 import Instagram from 'lucide-react/dist/esm/icons/instagram.js'
 import MapPin from 'lucide-react/dist/esm/icons/map-pin.js'
@@ -26,6 +29,7 @@ const navItems = [
   ['Рішення', '#services'],
   ['Етапи', '#how'],
   ['Лікар', '#doctor'],
+  ['Результати', '#results'],
   ['Гарантія', '#guarantee'],
 ]
 
@@ -119,6 +123,44 @@ const solutions = [
     tag: 'Лікування',
     title: 'Повний цикл в одному центрі',
     text: 'Від діагностики та хірургії до коронки й контрольного огляду.',
+  },
+]
+
+const resultCases = [
+  {
+    title: 'Протезування на імплантах',
+    text: 'Відновлення жувальної функції та цілісності зубного ряду.',
+    images: [1, 2],
+  },
+  {
+    title: 'Встановлення цирконієвих коронок',
+    text: 'Відновлення анатомічної форми й природного відтінку зубів.',
+    images: [3, 4, 5],
+  },
+  {
+    title: 'Керамічні вініри верхньої щелепи',
+    text: 'Гармонізація форми, кольору та пропорцій верхніх зубів.',
+    images: [6, 7, 8],
+  },
+  {
+    title: 'Імплантація',
+    text: 'Відновлення відсутнього зуба з опорою на імплант.',
+    images: [9, 10],
+  },
+  {
+    title: 'Імплантація та відновлення зубного ряду',
+    text: 'Комплексний хірургічний та ортопедичний етап лікування.',
+    images: [11, 13, 14, 15, 16, 17],
+  },
+  {
+    title: 'Тотальна реабілітація верхньої щелепи на 4-х імплантатах з негайним навантаженням',
+    text: 'Фіксована конструкція одразу після хірургічного етапу.',
+    images: [18, 19, 20, 21, 22],
+  },
+  {
+    title: 'Тотальна реабілітація верхньої щелепи',
+    text: 'Комплексне відновлення функції та естетики верхнього зубного ряду.',
+    images: [23, 24, 25, 26, 27, 28],
   },
 ]
 
@@ -360,6 +402,160 @@ function SuccessPage() {
   )
 }
 
+function ResultCard({ item, caseIndex, onOpen }) {
+  const [active, setActive] = useState(0)
+  const imageNumber = item.images[active]
+
+  function showRelativeImage(direction) {
+    setActive((current) => (current + direction + item.images.length) % item.images.length)
+  }
+
+  return (
+    <article
+      data-reveal="up"
+      style={{ '--reveal-delay': `${(caseIndex % 3) * 70}ms` }}
+      className="result-card"
+    >
+      <div className="result-card__media">
+        <button
+          className="result-card__open"
+          type="button"
+          onClick={() => onOpen(caseIndex, active)}
+          aria-label={`Збільшити фото кейсу «${item.title}»`}
+        >
+          <img
+            src={`/images/result/${imageNumber}.jpg`}
+            alt={`Клінічний результат: ${item.title}, фото ${active + 1} з ${item.images.length}`}
+            loading="lazy"
+          />
+          <span className="result-card__expand"><Expand /></span>
+        </button>
+        <div className="result-card__labels" aria-hidden="true">
+          <span>До</span>
+          <span>Після</span>
+        </div>
+        <button
+          className="result-card__arrow result-card__arrow--prev"
+          type="button"
+          onClick={() => showRelativeImage(-1)}
+          aria-label={`Попереднє фото кейсу «${item.title}»`}
+        >
+          <ChevronLeft />
+        </button>
+        <button
+          className="result-card__arrow result-card__arrow--next"
+          type="button"
+          onClick={() => showRelativeImage(1)}
+          aria-label={`Наступне фото кейсу «${item.title}»`}
+        >
+          <ChevronRight />
+        </button>
+        <span className="result-card__counter">{active + 1} / {item.images.length}</span>
+      </div>
+      <div className="result-card__body">
+        <span>Кейс {String(caseIndex + 1).padStart(2, '0')}</span>
+        <h3>{item.title}</h3>
+        <p>{item.text}</p>
+        <div className="result-card__dots" aria-label="Фото кейсу">
+          {item.images.map((number, index) => (
+            <button
+              className={index === active ? 'is-active' : ''}
+              type="button"
+              key={number}
+              onClick={() => setActive(index)}
+              aria-label={`Показати фото ${index + 1}`}
+              aria-current={index === active ? 'true' : undefined}
+            />
+          ))}
+        </div>
+      </div>
+    </article>
+  )
+}
+
+function ResultsGallery() {
+  const [preview, setPreview] = useState(null)
+
+  useEffect(() => {
+    if (!preview) return undefined
+
+    const handleKey = (event) => {
+      if (event.key === 'Escape') setPreview(null)
+      if (event.key === 'ArrowLeft') {
+        setPreview((current) => {
+          const images = resultCases[current.caseIndex].images
+          return { ...current, photoIndex: (current.photoIndex - 1 + images.length) % images.length }
+        })
+      }
+      if (event.key === 'ArrowRight') {
+        setPreview((current) => {
+          const images = resultCases[current.caseIndex].images
+          return { ...current, photoIndex: (current.photoIndex + 1) % images.length }
+        })
+      }
+    }
+
+    document.body.classList.add('results-lightbox-open')
+    window.addEventListener('keydown', handleKey)
+    return () => {
+      document.body.classList.remove('results-lightbox-open')
+      window.removeEventListener('keydown', handleKey)
+    }
+  }, [preview])
+
+  function movePreview(direction) {
+    setPreview((current) => {
+      const images = resultCases[current.caseIndex].images
+      return { ...current, photoIndex: (current.photoIndex + direction + images.length) % images.length }
+    })
+  }
+
+  const previewCase = preview ? resultCases[preview.caseIndex] : null
+  const previewImage = previewCase ? previewCase.images[preview.photoIndex] : null
+
+  return (
+    <>
+      <div className="results-grid">
+        {resultCases.map((item, index) => (
+          <ResultCard
+            item={item}
+            caseIndex={index}
+            key={`${item.title}-${index}`}
+            onOpen={(caseIndex, photoIndex) => setPreview({ caseIndex, photoIndex })}
+          />
+        ))}
+      </div>
+
+      {preview && (
+        <div
+          className="results-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Фото кейсу «${previewCase.title}»`}
+          onMouseDown={(event) => event.target === event.currentTarget && setPreview(null)}
+        >
+          <button className="results-lightbox__close" type="button" onClick={() => setPreview(null)} aria-label="Закрити перегляд">
+            <X />
+          </button>
+          <div className="results-lightbox__stage">
+            <img src={`/images/result/${previewImage}.jpg`} alt={`${previewCase.title}, збільшене фото`} />
+            <button className="results-lightbox__arrow results-lightbox__arrow--prev" type="button" onClick={() => movePreview(-1)} aria-label="Попереднє фото">
+              <ChevronLeft />
+            </button>
+            <button className="results-lightbox__arrow results-lightbox__arrow--next" type="button" onClick={() => movePreview(1)} aria-label="Наступне фото">
+              <ChevronRight />
+            </button>
+          </div>
+          <div className="results-lightbox__caption">
+            <div><span>Кейс {String(preview.caseIndex + 1).padStart(2, '0')}</span><strong>{previewCase.title}</strong></div>
+            <span>{preview.photoIndex + 1} / {previewCase.images.length}</span>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
 function FAQ() {
   const [active, setActive] = useState(0)
   return (
@@ -554,6 +750,18 @@ function App() {
                   <div className="solution-card__body"><span>{item.tag}</span><h3>{item.title}</h3><p>{item.text}</p></div>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section results-section" id="results">
+          <div className="container">
+            <SectionHeading eyebrow="Результати" title="Результати наших робіт" text="Реальні випадки до і після. Найкраще про якість говорять усмішки наших пацієнтів." />
+            <ResultsGallery />
+            <div className="results-cta" data-reveal="up">
+              <p>Більше робіт — у нашому <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram</a>. Хочете такий самий результат?</p>
+              <a className="button button--outline" href="#contact">Почати з консультації <ArrowRight size={18} /></a>
+              <small>Результат лікування індивідуальний і залежить від клінічної ситуації.</small>
             </div>
           </div>
         </section>
