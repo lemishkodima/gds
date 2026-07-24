@@ -1,4 +1,4 @@
-import { createElement, useEffect, useState } from 'react'
+import { createElement, useEffect, useRef, useState } from 'react'
 import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right.js'
 import CalendarCheck from 'lucide-react/dist/esm/icons/calendar-check.js'
 import Check from 'lucide-react/dist/esm/icons/check.js'
@@ -473,6 +473,8 @@ function ResultsGallery() {
   const [preview, setPreview] = useState(null)
   const [caseStart, setCaseStart] = useState(0)
   const [caseDirection, setCaseDirection] = useState('next')
+  const swipeStart = useRef(null)
+  const suppressSwipeClick = useRef(false)
   const [visibleCases, setVisibleCases] = useState(() => {
     if (window.innerWidth <= 600) return 1
     if (window.innerWidth <= 1080) return 2
@@ -534,6 +536,31 @@ function ResultsGallery() {
     setCaseStart(index)
   }
 
+  function handleSwipeStart(event) {
+    if (event.pointerType === 'mouse' && event.button !== 0) return
+    swipeStart.current = { x: event.clientX, y: event.clientY }
+    event.currentTarget.setPointerCapture?.(event.pointerId)
+  }
+
+  function handleSwipeEnd(event) {
+    if (!swipeStart.current) return
+
+    const deltaX = event.clientX - swipeStart.current.x
+    const deltaY = event.clientY - swipeStart.current.y
+    swipeStart.current = null
+
+    if (Math.abs(deltaX) < 48 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.15) return
+    suppressSwipeClick.current = true
+    moveCases(deltaX < 0 ? 1 : -1)
+    window.setTimeout(() => { suppressSwipeClick.current = false }, 350)
+  }
+
+  function handleCarouselClickCapture(event) {
+    if (!suppressSwipeClick.current) return
+    event.preventDefault()
+    event.stopPropagation()
+  }
+
   const previewCase = preview ? resultCases[preview.caseIndex] : null
   const previewImage = previewCase ? previewCase.images[preview.photoIndex] : null
   const visibleCaseIndexes = Array.from(
@@ -544,7 +571,13 @@ function ResultsGallery() {
   return (
     <>
       <div className="results-carousel" data-reveal="up">
-        <div className="results-carousel__viewport">
+        <div
+          className="results-carousel__viewport"
+          onPointerDown={handleSwipeStart}
+          onPointerUp={handleSwipeEnd}
+          onPointerCancel={() => { swipeStart.current = null }}
+          onClickCapture={handleCarouselClickCapture}
+        >
           <div
             className={`results-grid results-grid--${caseDirection}`}
             key={`${caseStart}-${visibleCases}`}

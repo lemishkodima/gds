@@ -1029,6 +1029,9 @@ h3 {
   overflow: hidden;
   margin: -14px;
   padding: 14px;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .results-grid {
