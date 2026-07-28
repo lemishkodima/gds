@@ -150,17 +150,17 @@ const resultCases = [
   {
     title: 'Імплантація та відновлення зубного ряду',
     text: 'Комплексний хірургічний та ортопедичний етап лікування.',
-    images: [11, 13, 14, 15, 16, 17],
+    images: [11, 13, 14, 15, 16],
   },
   {
     title: 'Тотальна реабілітація верхньої щелепи на 4-х імплантатах з негайним навантаженням',
     text: 'Фіксована конструкція одразу після хірургічного етапу.',
-    images: [18, 19, 20, 21, 22],
+    images: [17, 18, 19, 20, 21],
   },
   {
     title: 'Тотальна реабілітація верхньої щелепи',
     text: 'Комплексне відновлення функції та естетики верхнього зубного ряду.',
-    images: [23, 24, 25, 26, 27, 28],
+    images: [22, 23, 24, 25, 26, 27, 28],
   },
 ]
 
@@ -537,7 +537,7 @@ function ResultsGallery() {
   }
 
   function handleSwipeStart(event) {
-    if (event.pointerType === 'mouse' && event.button !== 0) return
+    if (event.pointerType === 'mouse') return
     swipeStart.current = { x: event.clientX, y: event.clientY }
     event.currentTarget.setPointerCapture?.(event.pointerId)
   }
