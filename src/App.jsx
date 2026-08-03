@@ -1067,7 +1067,7 @@ function App() {
                 <li><Check />Узгоджені етапи без втрати інформації</li>
                 <li><Check />Супровід від першого огляду до контрольних візитів</li>
               </ul>
-              <a className="button button--outline" href="/team">Познайомитися з лікарями <ArrowRight size={18} /></a>
+              <a className="button button--primary" href="/team">Познайомитися з лікарями <ArrowRight size={18} /></a>
             </div>
           </div>
           <div className="container clinic-gallery">
