@@ -131,7 +131,6 @@ const resultCases = [
     title: 'Протезування на імплантах',
     text: 'Відновлення жувальної функції та цілісності зубного ряду.',
     images: [1, 2],
-    mirror: true,
   },
   {
     title: 'Встановлення цирконієвих коронок',
@@ -628,7 +627,6 @@ function ResultCard({ item, caseIndex, onOpen }) {
           aria-label={`Збільшити фото кейсу «${item.title}»`}
         >
           <img
-            className={item.mirror ? 'result-image--mirrored' : undefined}
             src={`/images/result/${imageNumber}.jpg`}
             alt={`Клінічний результат: ${item.title}, фото ${active + 1} з ${item.images.length}`}
             loading="lazy"
@@ -838,7 +836,7 @@ function ResultsGallery() {
             <X />
           </button>
           <div className="results-lightbox__stage">
-            <img className={previewCase.mirror ? 'result-image--mirrored' : undefined} src={`/images/result/${previewImage}.jpg`} alt={`${previewCase.title}, збільшене фото`} />
+            <img src={`/images/result/${previewImage}.jpg`} alt={`${previewCase.title}, збільшене фото`} />
             <button className="results-lightbox__arrow results-lightbox__arrow--prev" type="button" onClick={() => movePreview(-1)} aria-label="Попереднє фото">
               <ChevronLeft />
             </button>
@@ -902,6 +900,34 @@ function App() {
   useRevealAnimations()
 
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/'
+
+  useEffect(() => {
+    if (pathname !== '/' || !window.location.hash) return undefined
+
+    const targetId = decodeURIComponent(window.location.hash.slice(1))
+    const scrollToTarget = () => {
+      const target = document.getElementById(targetId)
+      if (!target) return
+
+      const header = document.querySelector('.site-header')
+      const headerHeight = header?.getBoundingClientRect().height || 0
+      const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight
+      const previousScrollBehavior = document.documentElement.style.scrollBehavior
+
+      document.documentElement.style.scrollBehavior = 'auto'
+      window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'auto' })
+      document.documentElement.style.scrollBehavior = previousScrollBehavior
+    }
+
+    const frame = window.requestAnimationFrame(scrollToTarget)
+    const timer = window.setTimeout(scrollToTarget, 180)
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.clearTimeout(timer)
+    }
+  }, [pathname])
+
   if (pathname === '/success') return <SuccessPage />
   if (pathname === '/team') return <TeamPage />
 
