@@ -4,7 +4,8 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
-    { "source": "/success", "destination": "/" }
+    { "source": "/success", "destination": "/" },
+    { "source": "/team", "destination": "/" }
   ],
   "headers": [
     {

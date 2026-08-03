@@ -131,6 +131,7 @@ const resultCases = [
     title: 'Протезування на імплантах',
     text: 'Відновлення жувальної функції та цілісності зубного ряду.',
     images: [1, 2],
+    mirror: true,
   },
   {
     title: 'Встановлення цирконієвих коронок',
@@ -161,6 +162,87 @@ const resultCases = [
     title: 'Тотальна реабілітація верхньої щелепи',
     text: 'Комплексне відновлення функції та естетики верхнього зубного ряду.',
     images: [22, 23, 24, 25, 26, 27, 28],
+  },
+]
+
+const teamDoctors = [
+  {
+    id: 'yurii-hrudnenko',
+    name: 'Грудненко Юрій Петрович',
+    role: 'Лікар-стоматолог-хірург',
+    focus: 'Імплантація, тотальне відновлення зубів і кісткова пластика',
+    image: '/images/team/yurii-hrudnenko.webp',
+    imagePosition: 'center 42%',
+    paragraphs: [
+      'Спеціалізується на комплексному відновленні зубів у складних клінічних випадках. Разом із командою знаходить рішення навіть тоді, коли пацієнту раніше говорили, що відновити зуби неможливо.',
+      'Сучасні методики імплантації, цифрове планування та командний підхід допомагають досягати прогнозованого й довговічного результату.',
+      'Мета лікування — повернути не лише зуби, а й звичну якість життя.',
+    ],
+  },
+  {
+    id: 'nazar-kemenyash',
+    name: 'Кеменяш Назар Михайлович',
+    role: 'Лікар-стоматолог-гігієніст, пародонтолог',
+    focus: 'Здоров’я ясен, професійна гігієна та підготовка до імплантації',
+    image: '/images/team/nazar-kemenyash.webp',
+    imagePosition: 'center 35%',
+    paragraphs: [
+      'Спеціалізується на діагностиці, профілактиці та лікуванні захворювань ясен і тканин, що оточують зуби. Допомагає зберегти власні зуби, підготувати ясна до імплантації та підтримати результат після протезування.',
+      'Професійну гігієну проводить за сучасним європейським протоколом із використанням системи Cavitron — для ретельного очищення зубів та імплантів із мінімальним дискомфортом.',
+      'Здорові ясна — фундамент красивої усмішки, успішної імплантації та довговічності ортопедичних конструкцій.',
+    ],
+  },
+  {
+    id: 'oleksandr-stupachynskyi',
+    name: 'Ступачинський Олександр Олександрович',
+    role: 'Лікар-стоматолог-хірург',
+    focus: 'Імплантація, кісткова пластика та пластика м’яких тканин',
+    image: '/images/team/oleksandr-stupachynskyi.webp',
+    imagePosition: 'center 22%',
+    paragraphs: [
+      'У хірургії найбільше цінує точність, спокій і прогнозованість. Кожне лікування ретельно планує та продумує до деталей, адже якісний результат починається з правильної підготовки.',
+      'Використовує сучасні хірургічні методики й цифрове планування, щоб проводити втручання точно, безпечно та з мінімальною травматичністю.',
+      'Завжди пояснює план лікування, відповідає на запитання та залишається поруч із пацієнтом на кожному етапі.',
+    ],
+  },
+  {
+    id: 'volodymyr-melnyk',
+    name: 'Мельник Володимир Олегович',
+    role: 'Лікар-стоматолог-ортопед',
+    focus: 'Сучасне протезування, коронки та відновлення зубів на імплантах',
+    image: '/images/team/volodymyr-melnyk.webp',
+    imagePosition: 'center 20%',
+    paragraphs: [
+      'Допомагає пацієнтам відновити зуби навіть у складних клінічних випадках — від встановлення окремих коронок до комплексного протезування на імплантах при повній або частковій втраті зубів.',
+      'Використовує сучасні цифрові технології та працює в команді з хірургами-імплантологами, щоб кожен етап лікування був точним, прогнозованим і комфортним.',
+      'На консультації детально пояснює можливі варіанти й допомагає обрати рішення відповідно до клінічної ситуації та очікувань пацієнта.',
+    ],
+  },
+  {
+    id: 'svitlana-makarycheva',
+    name: 'Макаричева Світлана Ігорівна',
+    role: 'Лікар-ортодонт',
+    focus: 'Брекети, елайнери, цифрове планування та 3D-моделювання',
+    image: '/images/team/svitlana-makarycheva.webp',
+    imagePosition: 'center 22%',
+    paragraphs: [
+      'Працює з брекетами, елайнерами та іншими сучасними ортодонтичними системами, використовуючи цифрове планування, 3D-сканування та моделювання майбутнього результату.',
+      'Її мета — не лише вирівняти зуби, а й створити правильний прикус та умови для точного, прогнозованого й довговічного комплексного лікування.',
+      'Ортодонтична підготовка часто стає важливим етапом перед імплантацією, протезуванням і комплексною реабілітацією.',
+    ],
+  },
+  {
+    id: 'taras-volodchenko',
+    name: 'Володченко Тарас Андрійович',
+    role: 'Лікар-стоматолог-хірург',
+    focus: 'Імплантація, складні видалення, кісткова пластика та підготовка до протезування',
+    image: '/images/team/taras-volodchenko.webp',
+    imagePosition: 'center 24%',
+    paragraphs: [
+      'У роботі керується трьома принципами — точністю, послідовністю та прогнозованістю. Кожне лікування починає з ретельної діагностики й детального планування.',
+      'Використовує сучасні цифрові технології та міжнародні протоколи, щоб усі етапи були максимально точними, безпечними й комфортними для пацієнта.',
+      'На консультації аналізує клінічну ситуацію, складає індивідуальний план і допомагає обрати оптимальне рішення для відновлення зубів.',
+    ],
   },
 ]
 
@@ -217,9 +299,11 @@ function SectionHeading({ eyebrow, title, text, centered = false, light = false 
   )
 }
 
-function Header() {
+function Header({ innerPage = false }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const isSolid = innerPage || scrolled || open
+  const pageHref = (href) => innerPage ? `/${href}` : href
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40)
@@ -239,15 +323,15 @@ function Header() {
   }, [open])
 
   return (
-    <header className={`site-header ${scrolled || open ? 'site-header--solid' : ''}`}>
+    <header className={`site-header ${isSolid ? 'site-header--solid' : ''}`}>
       <div className="container nav-wrap">
-        <Logo light={!scrolled && !open} />
+        <Logo light={!isSolid} href={innerPage ? '/' : '#top'} />
         <nav className="desktop-nav" aria-label="Основна навігація">
-          {navItems.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
+          {navItems.map(([label, href]) => <a key={href} href={pageHref(href)}>{label}</a>)}
         </nav>
         <div className="nav-actions">
           <a className="nav-phone" href={`tel:${PHONE_HREF}`}><Phone size={16} />{PHONE_DISPLAY}</a>
-          <a className="button button--primary button--small" href="#contact">Записатися</a>
+          <a className="button button--primary button--small" href={pageHref('#contact')}>Записатися</a>
         </div>
         <button
           className="menu-toggle"
@@ -262,12 +346,39 @@ function Header() {
       </div>
       <div className={`mobile-menu ${open ? 'mobile-menu--open' : ''}`} id="mobile-menu">
         <nav aria-label="Мобільна навігація">
-          {navItems.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}<ArrowRight size={17} /></a>)}
+          {navItems.map(([label, href]) => <a key={href} href={pageHref(href)} onClick={() => setOpen(false)}>{label}<ArrowRight size={17} /></a>)}
           <a href={`tel:${PHONE_HREF}`} onClick={() => setOpen(false)}><Phone size={17} />{PHONE_DISPLAY}</a>
-          <a className="button button--primary" href="#contact" onClick={() => setOpen(false)}>Записатися на консультацію</a>
+          <a className="button button--primary" href={pageHref('#contact')} onClick={() => setOpen(false)}>Записатися на консультацію</a>
         </nav>
       </div>
     </header>
+  )
+}
+
+function SiteFooter({ innerPage = false }) {
+  const pageHref = (href) => innerPage ? `/${href}` : href
+
+  return (
+    <footer className="site-footer">
+      <div className="container footer-grid">
+        <div><Logo href={innerPage ? '/' : '#top'} /><p>Центр імплантації та рентгендіагностики зубів у Богуславі.</p></div>
+        <nav aria-label="Навігація у підвалі">
+          {navItems.map(([label, href]) => <a key={href} href={pageHref(href)}>{label}</a>)}
+          <a href={pageHref('#faq')}>FAQ</a>
+        </nav>
+        <div className="footer-contact"><a href={`tel:${PHONE_HREF}`}>{PHONE_DISPLAY}</a><span>Будні · 09:00–17:00</span></div>
+      </div>
+      <div className="container footer-bottom"><span>© {new Date().getFullYear()} GDC Implants. Богуслав.</span><span>Інформація на сайті не замінює консультацію лікаря.</span></div>
+    </footer>
+  )
+}
+
+function MobileBar({ innerPage = false }) {
+  return (
+    <div className="mobile-bar">
+      <a href={`tel:${PHONE_HREF}`}><Phone />Зателефонувати</a>
+      <a href={innerPage ? '/#contact' : '#contact'}><CalendarCheck />Записатися</a>
+    </div>
   )
 }
 
@@ -402,6 +513,103 @@ function SuccessPage() {
   )
 }
 
+function TeamPage() {
+  useEffect(() => {
+    const previousTitle = document.title
+    const description = document.querySelector('meta[name="description"]')
+    const previousDescription = description?.getAttribute('content')
+
+    document.title = 'Команда лікарів GDC Implants у Богуславі'
+    description?.setAttribute('content', 'Лікарі GDC Implants у Богуславі: імплантація, хірургія, протезування, ортодонтія, пародонтологія та професійна гігієна.')
+
+    return () => {
+      document.title = previousTitle
+      if (description && previousDescription) description.setAttribute('content', previousDescription)
+    }
+  }, [])
+
+  return (
+    <>
+      <Header innerPage />
+      <main className="team-page" id="top">
+        <section className="team-hero">
+          <div className="container team-hero__inner">
+            <div data-reveal="up">
+              <span className="eyebrow">Команда GDC</span>
+              <h1>Лікарі, які ведуть до результату разом</h1>
+              <p>Один центр, спільний цифровий план і команда фахівців для кожного етапу — від здоров’я ясен та прикусу до імплантації й постійних зубів.</p>
+            </div>
+            <div className="team-hero__facts" data-reveal="right">
+              <div><strong>6</strong><span>лікарів у команді</span></div>
+              <div><strong>1</strong><span>узгоджений план лікування</span></div>
+              <div><strong>3D</strong><span>діагностика на місці</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section team-directory" aria-labelledby="team-directory-title">
+          <div className="container">
+            <div className="team-directory__heading" data-reveal="up">
+              <span className="eyebrow">Наші лікарі</span>
+              <h2 id="team-directory-title">Команда, у якій кожен відповідає за свою точність</h2>
+              <p>Познайомтеся з фахівцями, які працюють над вашим результатом як одна команда.</p>
+            </div>
+
+            <div className="team-list">
+              {teamDoctors.map((doctor, index) => (
+                <article
+                  className={`doctor-profile ${index % 2 ? 'doctor-profile--reverse' : ''}`}
+                  id={doctor.id}
+                  key={doctor.id}
+                  data-reveal="up"
+                >
+                  <div className="doctor-profile__photo">
+                    <img
+                      src={doctor.image}
+                      alt={`${doctor.name}, ${doctor.role.toLowerCase()} GDC Implants`}
+                      style={{ objectPosition: doctor.imagePosition }}
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                    />
+                    <span className="doctor-profile__number">{String(index + 1).padStart(2, '0')}</span>
+                  </div>
+                  <div className="doctor-profile__content">
+                    <span className="doctor-profile__label">Фахівець GDC Implants</span>
+                    <h2>{doctor.name}</h2>
+                    <div className="doctor-profile__meta">
+                      <div><span>Напрям роботи</span><strong>{doctor.role}</strong></div>
+                      <div><span>Спеціалізується на</span><strong>{doctor.focus}</strong></div>
+                    </div>
+                    <div className="doctor-profile__text">
+                      {doctor.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                    </div>
+                    <a className="button button--primary" href="/#contact">Записатися на консультацію <ArrowRight size={18} /></a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section team-consultation">
+          <div className="container team-consultation__card" data-reveal="scale">
+            <div>
+              <span className="eyebrow">Перший крок</span>
+              <h2>Не знаєте, до якого лікаря записатися?</h2>
+              <p>Опишіть свій запит адміністратору — ми підберемо потрібного фахівця та зручний час.</p>
+            </div>
+            <div className="team-consultation__actions">
+              <a className="button button--primary" href="/#contact">Залишити заявку <ArrowRight size={18} /></a>
+              <a className="button button--ghost" href={`tel:${PHONE_HREF}`}><Phone size={18} /> {PHONE_DISPLAY}</a>
+            </div>
+          </div>
+        </section>
+      </main>
+      <SiteFooter innerPage />
+      <MobileBar innerPage />
+    </>
+  )
+}
+
 function ResultCard({ item, caseIndex, onOpen }) {
   const [active, setActive] = useState(0)
   const imageNumber = item.images[active]
@@ -420,6 +628,7 @@ function ResultCard({ item, caseIndex, onOpen }) {
           aria-label={`Збільшити фото кейсу «${item.title}»`}
         >
           <img
+            className={item.mirror ? 'result-image--mirrored' : undefined}
             src={`/images/result/${imageNumber}.jpg`}
             alt={`Клінічний результат: ${item.title}, фото ${active + 1} з ${item.images.length}`}
             loading="lazy"
@@ -629,7 +838,7 @@ function ResultsGallery() {
             <X />
           </button>
           <div className="results-lightbox__stage">
-            <img src={`/images/result/${previewImage}.jpg`} alt={`${previewCase.title}, збільшене фото`} />
+            <img className={previewCase.mirror ? 'result-image--mirrored' : undefined} src={`/images/result/${previewImage}.jpg`} alt={`${previewCase.title}, збільшене фото`} />
             <button className="results-lightbox__arrow results-lightbox__arrow--prev" type="button" onClick={() => movePreview(-1)} aria-label="Попереднє фото">
               <ChevronLeft />
             </button>
@@ -694,6 +903,7 @@ function App() {
 
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/'
   if (pathname === '/success') return <SuccessPage />
+  if (pathname === '/team') return <TeamPage />
 
   return (
     <>
@@ -825,7 +1035,10 @@ function App() {
             </div>
           </div>
           <div className="container clinic-gallery">
-            <div data-reveal="up"><img src="/images/team.webp" alt="Команда GDC Implants у кабінеті" loading="lazy" /><span>Команда центру</span></div>
+            <a className="clinic-gallery__team" href="/team" data-reveal="up" aria-label="Познайомитися з командою GDC Implants">
+              <img src="/images/team.webp" alt="Команда GDC Implants у кабінеті" loading="lazy" />
+              <span>Команда центру <ArrowRight /></span>
+            </a>
             <div data-reveal="up" style={{ '--reveal-delay': '75ms' }}><img src="/images/clinic.webp" alt="Сучасний стоматологічний кабінет GDC Implants" loading="lazy" /><span>Сучасний кабінет</span></div>
             <div data-reveal="up" style={{ '--reveal-delay': '150ms' }}><img src="/images/exterior.webp" alt="Вивіска GDC Implants у Богуславі" loading="lazy" /><span>Центр у Богуславі</span></div>
           </div>
@@ -919,23 +1132,8 @@ function App() {
           </div>
         </section>
       </main>
-
-      <footer className="site-footer">
-        <div className="container footer-grid">
-          <div><Logo /><p>Центр імплантації та рентгендіагностики зубів у Богуславі.</p></div>
-          <nav aria-label="Навігація у підвалі">
-            {navItems.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
-            <a href="#faq">FAQ</a>
-          </nav>
-          <div className="footer-contact"><a href={`tel:${PHONE_HREF}`}>{PHONE_DISPLAY}</a><span>Будні · 09:00–17:00</span></div>
-        </div>
-        <div className="container footer-bottom"><span>© {new Date().getFullYear()} GDC Implants. Богуслав.</span><span>Інформація на сайті не замінює консультацію лікаря.</span></div>
-      </footer>
-
-      <div className="mobile-bar">
-        <a href={`tel:${PHONE_HREF}`}><Phone />Зателефонувати</a>
-        <a href="#contact"><CalendarCheck />Записатися</a>
-      </div>
+      <SiteFooter />
+      <MobileBar />
     </>
   )
 }
