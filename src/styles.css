@@ -965,23 +965,6 @@ h3 {
   font-weight: 600;
 }
 
-.clinic-gallery__team span {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.clinic-gallery__team span svg {
-  width: 18px;
-  height: 18px;
-  transition: transform 180ms ease;
-}
-
-.clinic-gallery__team:hover span svg {
-  transform: translateX(4px);
-}
-
 .team-page {
   padding-top: 78px;
   background: #f8fafb;

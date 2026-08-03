@@ -1055,26 +1055,26 @@ function App() {
         <section className="section" id="doctor">
           <div className="container doctor-grid">
             <div className="doctor-photo" data-reveal="left">
-              <img src="/images/doctor.webp" alt="Грудненко Юрій Петрович, хірург-стоматолог GDC Implants" loading="lazy" />
-              <div><span>Хірург-стоматолог</span><strong>Грудненко Юрій Петрович</strong></div>
+              <img src="/images/team.webp" alt="Команда лікарів GDC Implants у кабінеті центру" loading="lazy" />
+              <div><span>Команда центру</span><strong>Лікарі GDC Implants</strong></div>
             </div>
             <div className="doctor-copy" data-reveal="right">
-              <SectionHeading eyebrow="Хто вас лікує" title="Лікар веде ваш випадок від діагностики до результату" />
-              <p>Планування відбувається за точним 3D-знімком і цифровим протоколом. Це дозволяє ще до операції визначити положення імпланта та обрати найбільш делікатний підхід.</p>
+              <SectionHeading eyebrow="Команда центру" title="Команда веде ваш випадок від діагностики до результату" />
+              <p>Над вашим лікуванням працюють фахівці різних напрямів. Вони разом аналізують 3D-знімок, узгоджують послідовність етапів і ведуть випадок за єдиним цифровим планом.</p>
               <ul className="check-list">
-                <li><Check />Хірургічна стоматологія та імплантація</li>
-                <li><Check />Навігаційні шаблони й цифрове планування</li>
-                <li><Check />Протоколи негайного навантаження</li>
-                <li><Check />Особистий супровід на всіх етапах</li>
+                <li><Check />Хірургія, ортопедія, ортодонтія та гігієна</li>
+                <li><Check />Єдиний цифровий план лікування</li>
+                <li><Check />Узгоджені етапи без втрати інформації</li>
+                <li><Check />Супровід від першого огляду до контрольних візитів</li>
               </ul>
-              <a className="button button--outline" href="#lead-form">Записатися до лікаря <ArrowRight size={18} /></a>
+              <a className="button button--outline" href="/team">Познайомитися з лікарями <ArrowRight size={18} /></a>
             </div>
           </div>
           <div className="container clinic-gallery">
-            <a className="clinic-gallery__team" href="/team" data-reveal="up" aria-label="Познайомитися з командою GDC Implants">
-              <img src="/images/team.webp" alt="Команда GDC Implants у кабінеті" loading="lazy" />
-              <span>Команда центру <ArrowRight /></span>
-            </a>
+            <div data-reveal="up">
+              <img src="/images/team-planning.webp" alt="Спільне планування лікування командою GDC Implants" loading="lazy" />
+              <span>Командне планування</span>
+            </div>
             <div data-reveal="up" style={{ '--reveal-delay': '75ms' }}><img src="/images/clinic.webp" alt="Сучасний стоматологічний кабінет GDC Implants" loading="lazy" /><span>Сучасний кабінет</span></div>
             <div data-reveal="up" style={{ '--reveal-delay': '150ms' }}><img src="/images/exterior.webp" alt="Вивіска GDC Implants у Богуславі" loading="lazy" /><span>Центр у Богуславі</span></div>
           </div>
