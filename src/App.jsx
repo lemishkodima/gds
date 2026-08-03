@@ -28,7 +28,7 @@ const navItems = [
   ['Переваги', '#benefits'],
   ['Рішення', '#services'],
   ['Етапи', '#how'],
-  ['Лікар', '#doctor'],
+  ['Лікарі', '/team'],
   ['Результати', '#results'],
   ['Гарантія', '#guarantee'],
 ]
@@ -312,7 +312,7 @@ function Header({ innerPage = false }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const isSolid = innerPage || scrolled || open
-  const pageHref = (href) => innerPage ? `/${href}` : href
+  const pageHref = (href) => href.startsWith('/') ? href : innerPage ? `/${href}` : href
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40)
@@ -340,7 +340,7 @@ function Header({ innerPage = false }) {
         </nav>
         <div className="nav-actions">
           <a className="nav-phone" href={`tel:${PHONE_HREF}`}><Phone size={16} />{PHONE_DISPLAY}</a>
-          <a className="button button--primary button--small" href={pageHref('#contact')}>Записатися</a>
+          <a className="button button--primary button--small" href={pageHref('#lead-form')}>Записатися</a>
         </div>
         <button
           className="menu-toggle"
@@ -357,7 +357,7 @@ function Header({ innerPage = false }) {
         <nav aria-label="Мобільна навігація">
           {navItems.map(([label, href]) => <a key={href} href={pageHref(href)} onClick={() => setOpen(false)}>{label}<ArrowRight size={17} /></a>)}
           <a href={`tel:${PHONE_HREF}`} onClick={() => setOpen(false)}><Phone size={17} />{PHONE_DISPLAY}</a>
-          <a className="button button--primary" href={pageHref('#contact')} onClick={() => setOpen(false)}>Записатися на консультацію</a>
+          <a className="button button--primary" href={pageHref('#lead-form')} onClick={() => setOpen(false)}>Записатися на консультацію</a>
         </nav>
       </div>
     </header>
@@ -365,7 +365,7 @@ function Header({ innerPage = false }) {
 }
 
 function SiteFooter({ innerPage = false }) {
-  const pageHref = (href) => innerPage ? `/${href}` : href
+  const pageHref = (href) => href.startsWith('/') ? href : innerPage ? `/${href}` : href
 
   return (
     <footer className="site-footer">
@@ -386,7 +386,7 @@ function MobileBar({ innerPage = false }) {
   return (
     <div className="mobile-bar">
       <a href={`tel:${PHONE_HREF}`}><Phone />Зателефонувати</a>
-      <a href={innerPage ? '/#contact' : '#contact'}><CalendarCheck />Записатися</a>
+      <a href={innerPage ? '/#lead-form' : '#lead-form'}><CalendarCheck />Записатися</a>
     </div>
   )
 }
@@ -448,7 +448,7 @@ function LeadForm() {
   }
 
   return (
-    <form className="lead-form" onSubmit={handleSubmit} noValidate={false}>
+    <form className="lead-form" id="lead-form" onSubmit={handleSubmit} noValidate={false}>
       <div className="lead-form__head">
         <span>Консультація</span>
         <h3>Залиште контакти</h3>
@@ -591,7 +591,7 @@ function TeamPage() {
                     <div className="doctor-profile__text">
                       {doctor.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                     </div>
-                    <a className="button button--primary" href="/#contact">Записатися на консультацію <ArrowRight size={18} /></a>
+                    <a className="button button--primary" href="/#lead-form">Записатися на консультацію <ArrowRight size={18} /></a>
                   </div>
                 </article>
               ))}
@@ -607,7 +607,7 @@ function TeamPage() {
               <p>Опишіть свій запит адміністратору — ми підберемо потрібного фахівця та зручний час.</p>
             </div>
             <div className="team-consultation__actions">
-              <a className="button button--primary" href="/#contact">Залишити заявку <ArrowRight size={18} /></a>
+              <a className="button button--primary" href="/#lead-form">Залишити заявку <ArrowRight size={18} /></a>
               <a className="button button--ghost" href={`tel:${PHONE_HREF}`}><Phone size={18} /> {PHONE_DISPLAY}</a>
             </div>
           </div>
@@ -958,7 +958,7 @@ function App() {
               </h1>
               <p>Цифрова діагностика, точне планування та сучасні протоколи імплантації — в одному центрі поруч із домом.</p>
               <div className="hero__actions">
-                <a className="button button--primary" href="#contact">Записатися на консультацію <ArrowRight size={18} /></a>
+                <a className="button button--primary" href="#lead-form">Записатися на консультацію <ArrowRight size={18} /></a>
                 <a className="button button--ghost" href="#services">Переглянути рішення</a>
               </div>
               <div className="hero__metrics">
@@ -1011,7 +1011,7 @@ function App() {
               <HeartHandshake />
               <h3>Вам не потрібно розбиратися в цьому самостійно</h3>
               <p>На консультації лікар оцінить ситуацію, покаже дані 3D-знімка та пояснить можливі варіанти. Рішення про лікування залишається за вами.</p>
-              <a className="button button--primary" href="#contact">Отримати консультацію</a>
+              <a className="button button--primary" href="#lead-form">Отримати консультацію</a>
             </div>
           </div>
         </section>
@@ -1028,7 +1028,7 @@ function App() {
                     <h3>{service.title}</h3>
                     <p>{service.text}</p>
                   </div>
-                  <a className="button button--outline service-row__cta" href="#contact" aria-label={`${service.cta}: ${service.title}`}>{service.cta}</a>
+                  <a className="button button--outline service-row__cta" href="#lead-form" aria-label={`${service.cta}: ${service.title}`}>{service.cta}</a>
                 </article>
               ))}
             </div>
@@ -1067,7 +1067,7 @@ function App() {
                 <li><Check />Протоколи негайного навантаження</li>
                 <li><Check />Особистий супровід на всіх етапах</li>
               </ul>
-              <a className="button button--outline" href="#contact">Записатися до лікаря <ArrowRight size={18} /></a>
+              <a className="button button--outline" href="#lead-form">Записатися до лікаря <ArrowRight size={18} /></a>
             </div>
           </div>
           <div className="container clinic-gallery">
@@ -1100,7 +1100,7 @@ function App() {
             <ResultsGallery />
             <div className="results-cta" data-reveal="up">
               <p>Більше робіт — у нашому <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram</a>. Хочете такий самий результат?</p>
-              <a className="button button--outline" href="#contact">Почати з консультації <ArrowRight size={18} /></a>
+              <a className="button button--outline" href="#lead-form">Почати з консультації <ArrowRight size={18} /></a>
               <small>Результат лікування індивідуальний і залежить від клінічної ситуації.</small>
             </div>
           </div>
@@ -1121,7 +1121,7 @@ function App() {
               <span>Спокійне планування бюджету</span>
               <h3>Точний кошторис після 3D-діагностики</h3>
               <p>Вартість залежить від кількості імплантів, обраної системи, стану кістки та типу майбутньої конструкції.</p>
-              <a className="button button--primary button--wide" href="#contact">Отримати план і кошторис</a>
+              <a className="button button--primary button--wide" href="#lead-form">Отримати план і кошторис</a>
             </div>
           </div>
         </section>
