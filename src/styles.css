@@ -2607,7 +2607,9 @@ h3 {
   }
 
   .hero h1 .hero__accent {
-    display: inline;
+    display: inline-block;
+    max-width: 100%;
+    line-height: 1.08;
     background-size: 0 var(--hero-marker-height);
   }
 
