@@ -384,7 +384,7 @@ function SiteFooter({ innerPage = false }) {
           {navItems.map(([label, href]) => <a key={href} href={pageHref(href)}>{label}</a>)}
           <a href={pageHref('#faq')}>FAQ</a>
         </nav>
-        <div className="footer-contact"><a href={`tel:${PHONE_HREF}`}>{PHONE_DISPLAY}</a><span>Будні · 09:00–17:00</span></div>
+        <div className="footer-contact"><a href={`tel:${PHONE_HREF}`}>{PHONE_DISPLAY}</a><span>Будні · 09:00–19:00</span></div>
       </div>
       <div className="container footer-bottom"><span>© {new Date().getFullYear()} GDC Implants. Богуслав.</span><span>Інформація на сайті не замінює консультацію лікаря.</span></div>
     </footer>
@@ -1167,7 +1167,7 @@ function App() {
               <div className="contact-list">
                 <a href={`tel:${PHONE_HREF}`}><span><Phone /></span><div><small>Телефон</small><strong>{PHONE_DISPLAY}</strong></div></a>
                 <div><span><MapPin /></span><div><small>Локація</small><strong>м. Богуслав</strong></div></div>
-                <div><span><Clock3 /></span><div><small>Графік</small><strong>Будні, 09:00–17:00</strong></div></div>
+                <div><span><Clock3 /></span><div><small>Графік</small><strong>Будні, 09:00–19:00</strong></div></div>
               </div>
               <div className="social-links">
                 <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="GDC Implants в Instagram"><Instagram /></a>
