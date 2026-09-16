@@ -896,21 +896,27 @@ function useRevealAnimations() {
   useEffect(() => {
     const elements = [...document.querySelectorAll('[data-reveal]')]
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    // Keep animation state outside className, which React replaces on FAQ updates.
+    const reveal = (element) => { element.dataset.revealState = 'visible' }
 
     if (reducedMotion || !('IntersectionObserver' in window)) {
-      elements.forEach((element) => element.classList.add('is-visible'))
+      elements.forEach(reveal)
       return undefined
     }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return
-        entry.target.classList.add('is-visible')
+        reveal(entry.target)
         observer.unobserve(entry.target)
       })
-    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' })
+    }, { threshold: 0, rootMargin: '0px 0px -7% 0px' })
 
-    elements.forEach((element) => observer.observe(element))
+    elements.forEach((element) => {
+      if (element.dataset.revealState === 'visible') return
+      element.dataset.revealState = 'pending'
+      observer.observe(element)
+    })
     return () => observer.disconnect()
   }, [])
 }
