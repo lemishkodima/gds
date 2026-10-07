@@ -20,7 +20,7 @@ import Target from 'lucide-react/dist/esm/icons/target.js'
 import WalletCards from 'lucide-react/dist/esm/icons/wallet-cards.js'
 import X from 'lucide-react/dist/esm/icons/x.js'
 
-const PHONE_DISPLAY = '068 100 60 20'
+const PHONE_DISPLAY = '+38 068 100 60 20'
 const PHONE_HREF = '+380681006020'
 const INSTAGRAM_URL = 'https://www.instagram.com/gdcimplants.boguslav/'
 
