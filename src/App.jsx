@@ -1181,8 +1181,8 @@ function App() {
                 <div><span><Clock3 /></span><div><small>Графік</small><strong>Щодня, 09:00–19:00</strong></div></div>
               </div>
               <div className="social-links">
-                <a className="social-link--instagram" href={INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="Наш Instagram"><Instagram /><span>Наш Instagram</span></a>
-                <a href={FACEBOOK_URL} target="_blank" rel="noreferrer" aria-label="GDC Implants у Facebook"><Facebook /></a>
+                <a className="social-link--labeled" href={INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="Наш Instagram"><Instagram /><span>Наш Instagram</span></a>
+                <a className="social-link--labeled" href={FACEBOOK_URL} target="_blank" rel="noreferrer" aria-label="Наш Facebook"><Facebook /><span>Наш Facebook</span></a>
               </div>
             </div>
             <div data-reveal="right"><LeadForm /></div>

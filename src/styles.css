@@ -2017,6 +2017,7 @@ h3 {
 
 .social-links {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 32px;
 }
@@ -2032,18 +2033,18 @@ h3 {
   transition: background 180ms ease, border-color 180ms ease;
 }
 
-.social-links .social-link--instagram {
+.social-links .social-link--labeled {
   display: inline-flex;
   width: auto;
   padding: 0 14px;
   gap: 9px;
 }
 
-.social-links .social-link--instagram svg {
+.social-links .social-link--labeled svg {
   color: var(--red);
 }
 
-.social-links .social-link--instagram span {
+.social-links .social-link--labeled span {
   color: #fff;
   font-size: 0.82rem;
   font-weight: 700;
