@@ -1997,9 +1997,18 @@ h3 {
   width: 20px;
 }
 
-.contact-list div div {
+.contact-list > a > div,
+.contact-list > div > div {
   display: flex;
   flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.contact-list__detail {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.85rem;
+  line-height: 1.5;
 }
 
 .contact-list small {
