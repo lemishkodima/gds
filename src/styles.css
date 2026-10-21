@@ -255,15 +255,16 @@ h3 {
 }
 
 .button--outline {
-  border-color: var(--line);
-  background: transparent;
-  color: var(--ink);
-  box-shadow: none;
+  border-color: var(--red);
+  background: var(--red);
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(200, 16, 46, 0.2);
 }
 
 .button--outline:hover {
-  border-color: var(--graphite);
-  background: #fff;
+  border-color: var(--red-dark);
+  background: var(--red-dark);
+  box-shadow: 0 16px 34px rgba(200, 16, 46, 0.28);
 }
 
 .button--wide {
@@ -306,6 +307,30 @@ h3 {
 .brand img {
   width: 100%;
   height: auto;
+}
+
+.brand--tagline {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.brand--tagline > span {
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.57rem;
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.site-header--solid .brand--tagline > span {
+  color: var(--muted);
+}
+
+.brand--tagline.brand--light {
+  padding: 3px 8px;
 }
 
 .brand--light {
@@ -584,13 +609,13 @@ h3 {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 18px;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .benefit-card {
   position: relative;
   min-height: 340px;
-  padding: 40px 30px;
+  padding: 40px 26px;
   border-right: 1px solid var(--line);
   background: transparent;
   transition: background 180ms ease, transform 180ms ease;
@@ -629,6 +654,12 @@ h3 {
 .benefit-card p {
   color: var(--muted);
   font-size: 0.88rem;
+}
+
+.contact-list__detail {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.76rem;
+  line-height: 1.4;
 }
 
 .pain-grid,
@@ -2271,11 +2302,11 @@ h3 {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .benefit-card:nth-child(2) {
+  .benefit-card:nth-child(2n) {
     border-right: 0;
   }
 
-  .benefit-card:nth-child(-n + 2) {
+  .benefit-card:nth-child(-n + 4) {
     border-bottom: 1px solid var(--line);
   }
 

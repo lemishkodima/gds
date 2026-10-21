@@ -8,6 +8,7 @@ import ChevronRight from 'lucide-react/dist/esm/icons/chevron-right.js'
 import CircleDollarSign from 'lucide-react/dist/esm/icons/circle-dollar-sign.js'
 import Clock3 from 'lucide-react/dist/esm/icons/clock-3.js'
 import Expand from 'lucide-react/dist/esm/icons/expand.js'
+import Facebook from 'lucide-react/dist/esm/icons/facebook.js'
 import HeartHandshake from 'lucide-react/dist/esm/icons/heart-handshake.js'
 import Instagram from 'lucide-react/dist/esm/icons/instagram.js'
 import MapPin from 'lucide-react/dist/esm/icons/map-pin.js'
@@ -17,12 +18,15 @@ import ScanLine from 'lucide-react/dist/esm/icons/scan-line.js'
 import ShieldCheck from 'lucide-react/dist/esm/icons/shield-check.js'
 import Sparkles from 'lucide-react/dist/esm/icons/sparkles.js'
 import Target from 'lucide-react/dist/esm/icons/target.js'
+import Timer from 'lucide-react/dist/esm/icons/timer.js'
 import WalletCards from 'lucide-react/dist/esm/icons/wallet-cards.js'
 import X from 'lucide-react/dist/esm/icons/x.js'
 
 const PHONE_DISPLAY = '+38 068 100 60 20'
 const PHONE_HREF = '+380681006020'
 const INSTAGRAM_URL = 'https://www.instagram.com/gdcimplants.boguslav/'
+const FACEBOOK_URL = 'https://www.facebook.com/GDCImplants'
+const MAP_URL = 'https://maps.app.goo.gl/HSUTLB3PaMhgV4RL8'
 
 const navItems = [
   ['Переваги', '#benefits'],
@@ -53,6 +57,11 @@ const benefits = [
     icon: ShieldCheck,
     title: 'Гарантія на результат',
     text: '5 років на постійні конструкції та до 10 років на імплантацію за умовами клініки.',
+  },
+  {
+    icon: Timer,
+    title: 'Повне відновлення зубів за один день',
+    text: 'Сучасні протоколи дозволяють замінити повний зубний ряд за один візит.',
   },
 ]
 
@@ -291,10 +300,11 @@ const faqs = [
   },
 ]
 
-function Logo({ light = false, href = '#top' }) {
+function Logo({ light = false, href = '#top', tagline = false }) {
   return (
-    <a className={`brand ${light ? 'brand--light' : ''}`} href={href} aria-label="GDC Implants — на початок сторінки">
+    <a className={`brand ${light ? 'brand--light' : ''} ${tagline ? 'brand--tagline' : ''}`} href={href} aria-label="GDC Implants — на початок сторінки">
       <img src="/logo.svg" alt="GDC Implants" />
+      {tagline && <span>Робимо складне лікування простим</span>}
     </a>
   )
 }
@@ -335,7 +345,7 @@ function Header({ innerPage = false }) {
   return (
     <header className={`site-header ${isSolid ? 'site-header--solid' : ''}`}>
       <div className="container nav-wrap">
-        <Logo light={!isSolid} href={innerPage ? '/' : '#top'} />
+        <Logo light={!isSolid} href={innerPage ? '/' : '#top'} tagline />
         <nav className="desktop-nav" aria-label="Основна навігація">
           {navItems.map(([label, href]) => <a key={href} href={pageHref(href)}>{label}</a>)}
         </nav>
@@ -1152,7 +1162,7 @@ function App() {
           <div className="container faq-grid">
             <div>
               <SectionHeading eyebrow="FAQ" title="Відповіді на часті запитання" text="Загальні відповіді допоможуть зорієнтуватися. Точні рекомендації можливі лише після огляду й діагностики." />
-              <a className="button button--outline" href={`tel:${PHONE_HREF}`}><Phone size={18} /> Поставити питання</a>
+              <a className="button button--primary" href="#lead-form"><CalendarCheck size={18} /> Записатися на діагностику або консультацію</a>
             </div>
             <FAQ />
           </div>
@@ -1164,11 +1174,15 @@ function App() {
               <SectionHeading eyebrow="Запис" title="Зробіть перший крок до впевненої усмішки" text="Залиште номер або зателефонуйте. Адміністратор підкаже, який запис обрати: консультацію, 3D КТ чи повторний прийом." light />
               <div className="contact-list">
                 <a href={`tel:${PHONE_HREF}`}><span><Phone /></span><div><small>Телефон</small><strong>{PHONE_DISPLAY}</strong></div></a>
-                <div><span><MapPin /></span><div><small>Локація</small><strong>м. Богуслав</strong></div></div>
+                <a href={MAP_URL} target="_blank" rel="noreferrer" aria-label="Відкрити адресу GDC Implants на карті: м. Богуслав, вул. Шевченка, 6">
+                  <span><MapPin /></span>
+                  <div><small>Локація</small><strong>м. Богуслав, вул. Шевченка, 6</strong><span className="contact-list__detail">Орієнтир — «Замкова гора»</span></div>
+                </a>
                 <div><span><Clock3 /></span><div><small>Графік</small><strong>Щодня, 09:00–19:00</strong></div></div>
               </div>
               <div className="social-links">
                 <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="GDC Implants в Instagram"><Instagram /></a>
+                <a href={FACEBOOK_URL} target="_blank" rel="noreferrer" aria-label="GDC Implants у Facebook"><Facebook /></a>
               </div>
             </div>
             <div data-reveal="right"><LeadForm /></div>
