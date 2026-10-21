@@ -1162,7 +1162,7 @@ function App() {
           <div className="container faq-grid">
             <div>
               <SectionHeading eyebrow="FAQ" title="Відповіді на часті запитання" text="Загальні відповіді допоможуть зорієнтуватися. Точні рекомендації можливі лише після огляду й діагностики." />
-              <a className="button button--primary" href="#lead-form"><CalendarCheck size={18} /> Записатися на діагностику або консультацію</a>
+              <a className="button button--primary" href="#lead-form"><CalendarCheck size={18} /> Записатися на діагностику</a>
             </div>
             <FAQ />
           </div>
