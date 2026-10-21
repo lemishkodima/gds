@@ -293,7 +293,7 @@ h3 {
   height: 78px;
   align-items: center;
   justify-content: space-between;
-  gap: 26px;
+  gap: 16px;
 }
 
 .brand {
@@ -311,17 +311,22 @@ h3 {
 
 .brand--tagline {
   display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 1px;
+  width: auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand--tagline img {
+  width: 154px;
+  flex: 0 0 auto;
 }
 
 .brand--tagline > span {
   color: #fff;
   font-family: 'Manrope', sans-serif;
-  font-size: 0.57rem;
+  font-size: 1rem;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.4;
   white-space: nowrap;
 }
 
@@ -330,7 +335,15 @@ h3 {
 }
 
 .brand--tagline.brand--light {
-  padding: 3px 8px;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.brand--tagline.brand--light img {
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
 }
 
 .brand--light {
@@ -342,7 +355,7 @@ h3 {
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: clamp(15px, 2vw, 30px);
+  gap: clamp(12px, 1.1vw, 20px);
 }
 
 .desktop-nav a,
@@ -2405,6 +2418,12 @@ h3 {
   .section-heading {
     margin-bottom: 42px;
   }
+}
+
+@media (max-width: 1200px) {
+  .desktop-nav {
+    display: none;
+  }
 
   .nav-actions {
     display: none;
@@ -2460,7 +2479,9 @@ h3 {
   .mobile-menu .button {
     margin-top: 16px;
   }
+}
 
+@media (max-width: 860px) {
   .hero {
     min-height: 820px;
     padding-bottom: 50px;
@@ -2649,6 +2670,23 @@ h3 {
 
   .site-header .brand {
     width: 148px;
+  }
+
+  .site-header .brand--tagline {
+    width: auto;
+    gap: 10px;
+  }
+
+  .brand--tagline img {
+    width: clamp(104px, 29vw, 140px);
+  }
+
+  .brand--tagline > span {
+    font-size: clamp(0.75rem, 3vw, 0.875rem);
+  }
+
+  .nav-wrap {
+    gap: 10px;
   }
 
   .brand--light {

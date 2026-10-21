@@ -304,7 +304,7 @@ function Logo({ light = false, href = '#top', tagline = false }) {
   return (
     <a className={`brand ${light ? 'brand--light' : ''} ${tagline ? 'brand--tagline' : ''}`} href={href} aria-label="GDC Implants — на початок сторінки">
       <img src="/logo.svg" alt="GDC Implants" />
-      {tagline && <span>Робимо складне лікування простим</span>}
+      {tagline && <span>Робимо складне<br />лікування простим</span>}
     </a>
   )
 }
