@@ -2032,6 +2032,24 @@ h3 {
   transition: background 180ms ease, border-color 180ms ease;
 }
 
+.social-links .social-link--instagram {
+  display: inline-flex;
+  width: auto;
+  padding: 0 14px;
+  gap: 9px;
+}
+
+.social-links .social-link--instagram svg {
+  color: var(--red);
+}
+
+.social-links .social-link--instagram span {
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .social-links a:hover {
   border-color: var(--red);
   background: var(--red);
