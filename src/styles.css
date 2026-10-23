@@ -1950,8 +1950,12 @@ h3 {
   transition: grid-template-rows 280ms ease;
 }
 
-.faq-answer p {
+.faq-answer > div {
   min-height: 0;
+  overflow: hidden;
+}
+
+.faq-answer p {
   color: var(--muted);
   font-size: 0.92rem;
 }
@@ -1961,7 +1965,11 @@ h3 {
 }
 
 .faq-item--open .faq-answer p {
-  padding: 0 46px 25px 0;
+  padding: 0 46px 16px 0;
+}
+
+.faq-item--open .faq-answer p:last-child {
+  padding-bottom: 25px;
 }
 
 .contact-section {
